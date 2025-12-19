@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brasa Burgers - Hamburgueria Artesanal</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Configuration for Tailwind extensions -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'cream': '#FFFDF9',
+            'appetite-orange': '#FF5C00',
+          },
+          fontFamily: {
+            'title': ['Archivo Black', 'sans-serif'],
+            'sans': ['Inter', 'sans-serif'],
+            'accent': ['Bebas Neue', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;700&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #FFFDF9;
+    }
+
+    .font-title {
+      font-family: 'Archivo Black', sans-serif;
+    }
+
+    .font-accent {
+      font-family: 'Bebas Neue', sans-serif;
+    }
+
+    .appetite-orange {
+      color: #FF5C00;
+    }
+
+    .bg-appetite-orange {
+      background-color: #FF5C00;
+    }
+
+    .bg-cream {
+      background-color: #FFFDF9;
+    }
+
+    .blob-shape {
+      filter: blur(40px);
+      z-index: -1;
+    }
+
+    /* Utilities */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="selection:bg-[#FF5C00] selection:text-white overflow-x-hidden">
+
+  <!-- Background Decorative Elements -->
+  <div class="fixed top-20 -left-20 w-80 h-80 bg-[#FF5C00]/10 rounded-full blob-shape pointer-events-none"></div>
+  <div class="fixed bottom-40 -right-20 w-96 h-96 bg-[#FF5C00]/5 rounded-full blob-shape pointer-events-none"></div>
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-cream/90 backdrop-blur-md z-50 border-b border-[#FF5C00]/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex items-center gap-2">
+          <div class="bg-appetite-orange p-1.5 rounded-lg text-white">
+            <!-- Flame Icon -->
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.115.385-2.256 1-3.5a2.5 2.5 0 0 1 2.5 3.5Z" />
+            </svg>
+          </div>
+          <span class="font-title text-2xl tracking-tighter uppercase italic" id="nav-brand-name">Brasa Burgers</span>
+        </div>
+
+        <!-- Desktop Links -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#home" class="text-black font-medium hover:text-[#FF5C00] transition-colors">Início</a>
+          <a href="#menu" class="text-black font-medium hover:text-[#FF5C00] transition-colors">Cardápio</a>
+          <a href="#reviews" class="text-black font-medium hover:text-[#FF5C00] transition-colors">Avaliações</a>
+          <a href="#location" class="text-black font-medium hover:text-[#FF5C00] transition-colors">Onde Estamos</a>
+          <a id="nav-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer"
+            class="bg-appetite-orange text-white px-6 py-2.5 rounded-full font-bold hover:scale-105 transition-all shadow-lg shadow-orange-500/30">
+            Peça Agora
+          </a>
+        </div>
+
+        <!-- Mobile Button -->
+        <div class="md:hidden flex items-center">
+          <button id="mobile-menu-btn" class="text-black p-2 rounded-lg">
+            <!-- Menu Icon -->
+            <svg id="icon-menu" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="12" y2="12" />
+              <line x1="4" x2="20" y1="6" y2="6" />
+              <line x1="4" x2="20" y1="18" y2="18" />
+            </svg>
+            <!-- X Icon (Hidden by default) -->
+            <svg id="icon-close" class="hidden" width="28" height="28" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 6 6 18" />
+              <path d="m6 6 18 18" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-cream border-b border-orange-100 shadow-xl">
+      <div class="px-4 pt-4 pb-8 space-y-4">
+        <a href="#home" class="mobile-link block text-xl font-bold py-2 border-b border-orange-50/50">Início</a>
+        <a href="#menu" class="mobile-link block text-xl font-bold py-2 border-b border-orange-50/50">Cardápio</a>
+        <a href="#reviews" class="mobile-link block text-xl font-bold py-2 border-b border-orange-50/50">Avaliações</a>
+        <a href="#location" class="mobile-link block text-xl font-bold py-2 border-b border-orange-50/50">Onde
+          Estamos</a>
+        <a id="mobile-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer"
+          class="block bg-appetite-orange text-center text-white text-xl px-6 py-4 rounded-xl font-bold">
+          Fazer Pedido
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-24 pb-16 lg:pt-40 lg:pb-32 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          <div class="relative z-10 text-center lg:text-left order-1">
+            <!-- Title -->
+            <h1
+              class="font-title text-5xl md:text-7xl lg:text-8xl leading-[0.9] text-black mb-8 uppercase italic tracking-tighter">
+              SABOR QUE <br />
+              <span class="text-appetite-orange">INCENDEIA.</span>
+            </h1>
+
+            <!-- MOBILE ONLY: Burger Image below title -->
+            <div class="lg:hidden mb-12 px-4">
+              <!-- Burger Render -->
+              <div class="relative group">
+                <div
+                  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] bg-[#FF5C00]/20 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] filter blur-2xl animate-pulse">
+                </div>
+                <div
+                  class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[70%] bg-[#FF5C00]/10 rounded-[60%_40%_30%_70%_/_50%_60%_40%_60%] rotate-45">
+                </div>
+                <div class="relative">
+                  <img
+                    src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1000&auto=format&fit=crop"
+                    alt="Brasa Burger Suculento"
+                    class="w-full h-auto object-cover rounded-[2.5rem] shadow-[0_40px_100px_-15px_rgba(255,92,0,0.3)] transition-all duration-700 hover:scale-[1.02]" />
+                  <div
+                    class="absolute -bottom-6 -right-4 bg-white p-5 rounded-3xl shadow-xl border border-orange-50 hidden sm:flex items-center gap-3">
+                    <div class="w-10 h-10 bg-appetite-orange rounded-full flex items-center justify-center text-white">
+                      <span class="font-title text-sm">B!</span>
+                    </div>
+                    <div>
+                      <p class="font-bold text-sm text-black">Brasa Supreme</p>
+                      <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">O mais pedido</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <p class="text-lg md:text-xl text-gray-700 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed font-medium">
+              Do preparo à entrega, tudo pensado para você comer bem sem esperar, com sabor, cuidado e rapidez em cada pedido.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <a href="#menu"
+                class="bg-appetite-orange text-white text-lg font-bold px-10 py-5 rounded-2xl shadow-2xl shadow-orange-500/40 hover:translate-y-[-4px] active:scale-95 transition-all text-center">
+                Ver Cardápio
+              </a>
+              <a id="hero-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer"
+                class="bg-black text-white text-lg font-bold px-10 py-5 rounded-2xl hover:bg-gray-900 active:scale-95 transition-all flex items-center justify-center gap-2">
+                <span>Pedir Agora</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- DESKTOP ONLY: Burger Image side-by-side -->
+          <div class="relative order-2 hidden lg:block">
+            <div class="relative group">
+              <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[80%] bg-[#FF5C00]/20 rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] filter blur-2xl animate-pulse">
+              </div>
+              <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] h-[70%] bg-[#FF5C00]/10 rounded-[60%_40%_30%_70%_/_50%_60%_40%_60%] rotate-45">
+              </div>
+              <div class="relative">
+                <img src="https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1000&auto=format&fit=crop"
+                  alt="Brasa Burger Suculento"
+                  class="w-full h-auto object-cover rounded-[2.5rem] shadow-[0_40px_100px_-15px_rgba(255,92,0,0.3)] transition-all duration-700 hover:scale-[1.02]" />
+                <div
+                  class="absolute -bottom-6 -right-4 bg-white p-5 rounded-3xl shadow-xl border border-orange-50 hidden sm:flex items-center gap-3">
+                  <div class="w-10 h-10 bg-appetite-orange rounded-full flex items-center justify-center text-white">
+                    <span class="font-title text-sm">B!</span>
+                  </div>
+                  <div>
+                    <p class="font-bold text-sm text-black">Brasa Supreme</p>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">O mais pedido</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-24 bg-[#FAF7F2]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="font-title text-4xl md:text-6xl text-black uppercase mb-4 italic tracking-tighter">
+            NOSSO <span class="text-appetite-orange">CARDÁPIO</span>
+          </h2>
+          <div class="w-24 h-2 bg-appetite-orange mx-auto rounded-full mb-8"></div>
+
+          <!-- Categories -->
+          <div class="flex flex-wrap justify-center gap-4" id="menu-categories">
+            <!-- Category buttons injected via JS -->
+          </div>
+        </div>
+
+        <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Menu items injected via JS -->
+        </div>
+
+        <!-- Feature Banner -->
+        <div
+          class="mt-20 bg-white rounded-[3rem] p-8 md:p-12 lg:p-16 relative overflow-hidden text-black flex flex-col lg:flex-row items-center justify-between gap-10 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] border border-orange-100">
+          <div class="relative z-10 text-center lg:text-left">
+            <h3 class="font-title text-4xl md:text-5xl lg:text-7xl uppercase italic mb-6 leading-none tracking-tighter">
+              QUER ALGO MAIS <br /> <span class="text-appetite-orange">PERSONALIZADO?</span>
+            </h3>
+            <p class="text-gray-600 max-w-xl font-medium text-lg md:text-xl leading-relaxed">
+              Fale conosco agora e monte seu Brasa do seu jeito! Adicione bacon extra, troque o queijo ou peça
+              seu molho preferido.
+            </p>
+          </div>
+
+          <div class="relative z-10 w-full lg:w-auto">
+            <a id="custom-order-btn" href="#" target="_blank" rel="noopener noreferrer"
+              class="block w-full lg:w-auto bg-appetite-orange text-white px-14 py-7 rounded-[2rem] font-title text-2xl md:text-4xl uppercase tracking-tighter hover:scale-105 transition-all shadow-[0_20px_50px_rgba(255,92,0,0.3)] text-center whitespace-nowrap active:scale-95">
+              PEÇA AGORA
+            </a>
+          </div>
+
+          <div class="absolute -bottom-20 -right-20 w-96 h-96 bg-appetite-orange/5 rounded-full blur-[100px]"></div>
+          <div class="absolute top-10 right-1/4 w-32 h-32 bg-orange-50 rounded-full blur-2xl"></div>
+          <div class="absolute -left-10 top-1/2 -translate-y-1/2 w-48 h-48 bg-gray-50 rounded-full blur-[80px]"></div>
+          <div class="absolute inset-0 opacity-[0.05] pointer-events-none"
+            style="background-image: radial-gradient(#FF5C00 0.5px, transparent 0); background-size: 40px 40px;"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-cream overflow-hidden relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
+          <div>
+            <h2 class="font-title text-4xl md:text-6xl text-black uppercase mb-4 italic tracking-tighter leading-none">
+              QUEM PROVA, <br /><span class="text-appetite-orange">RECOMENDA.</span>
+            </h2>
+            <div class="w-24 h-2 bg-appetite-orange rounded-full"></div>
+          </div>
+          <div class="text-right hidden md:block">
+            <div class="flex justify-end gap-1 mb-2">
+              <svg width="24" height="24" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+              <svg width="24" height="24" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+              <svg width="24" height="24" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+              <svg width="24" height="24" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+              <svg width="24" height="24" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24">
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                </polygon>
+              </svg>
+            </div>
+            <p class="font-bold text-gray-500 uppercase tracking-widest text-sm">Baseado em +500 pedidos</p>
+          </div>
+        </div>
+
+        <div id="reviews-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Reviews injected via JS -->
+        </div>
+      </div>
+
+      <!-- Background Graphic -->
+      <div class="absolute -bottom-40 -left-40 opacity-10 pointer-events-none rotate-45 select-none">
+        <span class="font-title text-[20rem] text-appetite-orange whitespace-nowrap">BRASA BRASA BRASA</span>
+      </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="py-24 bg-[#121212] text-white overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+          <div>
+            <h2 class="font-title text-4xl md:text-6xl uppercase italic mb-10 tracking-tighter leading-none">
+              VENHA CONHECER <br /><span class="text-appetite-orange">NOSSA HAMBURGUERIA.</span>
+            </h2>
+
+            <div class="space-y-8">
+              <div class="flex items-start gap-5">
+                <div class="bg-appetite-orange p-3 rounded-2xl">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xl mb-1">Localização</h4>
+                  <p class="text-gray-400 leading-relaxed" id="address-block">
+                    <!-- Address injected via JS -->
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-5">
+                <div class="bg-white/10 p-3 rounded-2xl">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xl mb-1">Horário de Funcionamento</h4>
+                  <div class="grid grid-cols-1 gap-1" id="hours-block">
+                    <!-- Hours injected via JS -->
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-5">
+                <div class="bg-white/10 p-3 rounded-2xl">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-bold text-xl mb-1">Siga a Gente</h4>
+                  <a id="instagram-link" href="#" target="_blank" rel="noopener noreferrer"
+                    class="text-appetite-orange font-bold text-lg hover:underline">
+                    <!-- Instagram injected via JS -->
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-12 flex gap-4">
+              <a id="phone-link" href="#"
+                class="flex items-center gap-2 bg-white/5 border border-white/10 px-6 py-4 rounded-2xl hover:bg-white/10 transition-all">
+                <svg width="20" height="20" class="text-appetite-orange" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+                <span class="font-bold" id="phone-text"></span>
+              </a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div
+              class="w-full h-[500px] rounded-[3rem] overflow-hidden border-4 border-white/5 grayscale hover:grayscale-0 transition-all duration-700 shadow-2xl">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.327575791341!2d-46.666133!3d-23.5925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5a165b4c483d%3A0x673995155f84f00d!2sAl.%20Jauaperi%2C%20213%20-%20Indian%C3%B3polis%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2004523-010!5e0!3m2!1spt-BR!2sbr!4v1711111111111!5m2!1spt-BR!2sbr"
+                width="100%" height="100%" style="border: 0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade" title="Localização Brasa Burgers"></iframe>
+            </div>
+
+            <div
+              class="absolute -bottom-10 -right-10 bg-appetite-orange text-white p-8 rounded-[2.5rem] shadow-2xl hidden md:block">
+              <p class="font-title text-2xl uppercase leading-none">FAÇA <br />UMA VISITA!</p>
+              <p class="mt-2 text-sm opacity-80 font-bold uppercase tracking-widest">Esperamos por você</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-white pt-20 pb-10 border-t border-orange-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2 mb-6">
+            <div class="bg-appetite-orange p-1.5 rounded-lg text-white">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.115.385-2.256 1-3.5a2.5 2.5 0 0 1 2.5 3.5Z" />
+              </svg>
+            </div>
+            <span class="font-title text-2xl tracking-tighter uppercase italic" id="footer-brand"></span>
+          </div>
+          <p class="text-gray-500 max-w-sm mb-8 leading-relaxed">
+            Elevando o conceito de hambúrguer através do fogo e da paixão. Ingredientes de qualidade e sabor
+            autêntico em cada mordida.
+          </p>
+          <div class="flex gap-4">
+            <a id="footer-instagram" href="#" target="_blank" rel="noopener noreferrer"
+              class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-appetite-orange hover:bg-appetite-orange hover:text-white transition-all">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+            </a>
+            <a id="footer-mail" href="#"
+              class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-appetite-orange hover:bg-appetite-orange hover:text-white transition-all">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </a>
+            <a id="footer-phone" href="#"
+              class="w-12 h-12 bg-orange-50 rounded-2xl flex items-center justify-center text-appetite-orange hover:bg-appetite-orange hover:text-white transition-all">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-title text-lg uppercase mb-6 tracking-tighter italic">Navegação</h4>
+          <ul class="space-y-4 text-gray-500 font-medium">
+            <li><a href="#home" class="hover:text-appetite-orange transition-colors">Início</a></li>
+            <li><a href="#menu" class="hover:text-appetite-orange transition-colors">Cardápio</a></li>
+            <li><a href="#reviews" class="hover:text-appetite-orange transition-colors">Avaliações</a></li>
+            <li><a href="#location" class="hover:text-appetite-orange transition-colors">Localização</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="pt-8 border-t border-orange-50 flex flex-col md:flex-row items-center justify-between gap-6 text-sm text-gray-400 font-bold uppercase tracking-widest">
+        <p>© <span id="footer-year"></span> <span id="footer-copy-name"></span>. Todos os direitos reservados.</p>
+        <p class="flex items-center gap-1.5">
+          Feito com <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-appetite-orange">
+            <path
+              d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z">
+            </path>
+          </svg> em São Paulo
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a id="floating-whatsapp" href="#" target="_blank" rel="noopener noreferrer"
+    class="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white p-4 rounded-full shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-all animate-bounce flex items-center justify-center group"
+    aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" stroke-width="0" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z">
+      </path>
+    </svg>
+    <span
+      class="absolute right-full mr-4 bg-white text-black font-bold px-4 py-2 rounded-xl text-sm whitespace-nowrap shadow-xl opacity-0 translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all pointer-events-none">
+      Peça pelo WhatsApp
+    </span>
+  </a>
+
+  <!-- Application Logic -->
+  <script>
+    // --- Constants ---
+    const BRASA_INFO = {
+      name: "Brasa Burgers",
+      phone: "(21) 983645358",
+      whatsappUrl: "https://wa.me/5521983645358",
+      email: "kellyanny346@gmail.com",
+      instagram: "anny._.kellyy",
+      address: "Alameda Jauaperi, 213, Indianópolis, São Paulo – SP",
+      cep: "04523-010",
+      hours: [
+        { days: "Terça a Quinta", time: "18h às 23h" },
+        { days: "Sexta e Sábado", time: "18h à 00h" },
+        { days: "Domingo", time: "18h às 22h" },
+        { days: "Segunda-feira", time: "Fechado" }
+      ]
+    };
+
+    const MENU_ITEMS = [
+      {
+        id: '1',
+        name: 'Classic Brasa',
+        description: 'Pão brioche, hambúrguer 160g, queijo cheddar, alface, tomate e molho da casa',
+        price: 22.90,
+        image: 'https://i.postimg.cc/zGvFmPbd/Gemini-Generated-Image-um0l2jum0l2jum0l.png',
+        category: 'burger'
+      },
+      {
+        id: '2',
+        name: 'Cheddar Bacon',
+        description: 'Pão brioche, hambúrguer 160g, cheddar cremoso, bacon crocante e molho especial',
+        price: 26.90,
+        image: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'burger'
+      },
+      {
+        id: '3',
+        name: 'Brasa Onion',
+        description: 'Pão brioche, hambúrguer 160g, queijo prato, onion rings e barbecue',
+        price: 27.90,
+        image: 'https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'burger'
+      },
+      {
+        id: '4',
+        name: 'Duplo Brasa',
+        description: 'Dois hambúrgueres 120g, cheddar, bacon e molho da casa',
+        price: 32.90,
+        image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'burger'
+      },
+      {
+        id: '5',
+        name: 'Brasa Supreme',
+        description: 'Hambúrguer 180g, queijo, bacon, cebola caramelizada e maionese artesanal',
+        price: 34.90,
+        image: 'https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'burger'
+      },
+      {
+        id: '6',
+        name: 'Batata Frita Tradicional',
+        description: 'Crocante e sequinha por fora, macia por dentro.',
+        price: 9.90,
+        image: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'side'
+      },
+      {
+        id: '7',
+        name: 'Refrigerante Lata (350ml)',
+        description: 'Escolha seu sabor favorito.',
+        price: 6.00,
+        image: 'https://images.unsplash.com/photo-1581639050682-628f8040d5a3?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'drink'
+      },
+      {
+        id: '8',
+        name: 'Combo Classic',
+        description: 'Classic Brasa + batata + refri lata',
+        price: 32.90,
+        image: 'https://images.unsplash.com/photo-1534790566855-4cb788d389ec?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'combo'
+      },
+      {
+        id: '9',
+        name: 'Combo Cheddar Bacon',
+        description: 'Cheddar Bacon + batata + refri lata',
+        price: 36.90,
+        image: 'https://images.unsplash.com/photo-1596662951482-0c4ba74a6df6?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'combo'
+      },
+      {
+        id: '10',
+        name: 'Combo Supreme',
+        description: 'Brasa Supreme + batata com cheddar e bacon + refri',
+        price: 42.90,
+        image: 'https://images.unsplash.com/photo-1512152272829-e3139592d56f?q=80&w=600&h=600&auto=format&fit=crop',
+        category: 'combo'
+      }
+    ];
+
+    const TESTIMONIALS = [
+      {
+        id: '1',
+        name: 'Lucas Silva',
+        text: 'O melhor hambúrguer que já comi em SP! A carne é suculenta e o molho da casa é viciante.',
+        stars: 5,
+        photo: 'https://picsum.photos/100/100?random=1'
+      },
+      {
+        id: '2',
+        name: 'Mariana Costa',
+        text: 'Ambiente top e atendimento rápido. O Cheddar Bacon é de outro mundo!',
+        stars: 5,
+        photo: 'https://picsum.photos/100/100?random=2'
+      },
+      {
+        id: '3',
+        name: 'Rodrigo Oliveira',
+        text: 'A batata chega crocante no delivery. Virei fã número 1.',
+        stars: 5,
+        photo: 'https://picsum.photos/100/100?random=3'
+      }
+    ];
+
+    // --- Initialization & Render Logic ---
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 1. Populate Info
+      document.getElementById('nav-brand-name').textContent = BRASA_INFO.name;
+      document.getElementById('nav-whatsapp-btn').href = BRASA_INFO.whatsappUrl;
+      document.getElementById('mobile-whatsapp-btn').href = BRASA_INFO.whatsappUrl;
+      document.getElementById('hero-whatsapp-btn').href = BRASA_INFO.whatsappUrl;
+      document.getElementById('custom-order-btn').href = BRASA_INFO.whatsappUrl;
+      document.getElementById('floating-whatsapp').href = BRASA_INFO.whatsappUrl;
+
+      document.getElementById('footer-brand').textContent = BRASA_INFO.name;
+      document.getElementById('footer-year').textContent = new Date().getFullYear();
+      document.getElementById('footer-copy-name').textContent = BRASA_INFO.name;
+
+      document.getElementById('address-block').innerHTML = `${BRASA_INFO.address}<br />CEP: ${BRASA_INFO.cep}`;
+
+      const hoursContainer = document.getElementById('hours-block');
+      BRASA_INFO.hours.forEach(h => {
+        const div = document.createElement('div');
+        div.className = "flex justify-between w-64 text-sm text-gray-400";
+        div.innerHTML = `<span>${h.days}:</span><span class="font-bold text-white">${h.time}</span>`;
+        hoursContainer.appendChild(div);
+      });
+
+      document.getElementById('instagram-link').href = `https://instagram.com/${BRASA_INFO.instagram}`;
+      document.getElementById('instagram-link').textContent = `@${BRASA_INFO.instagram}`;
+
+      document.getElementById('phone-link').href = `tel:${BRASA_INFO.phone}`;
+      document.getElementById('phone-text').textContent = BRASA_INFO.phone;
+
+      document.getElementById('footer-instagram').href = `https://instagram.com/${BRASA_INFO.instagram}`;
+      document.getElementById('footer-mail').href = `mailto:${BRASA_INFO.email}`;
+      document.getElementById('footer-phone').href = `tel:${BRASA_INFO.phone}`;
+
+
+      // 2. Mobile Menu Logic
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const iconMenu = document.getElementById('icon-menu');
+      const iconClose = document.getElementById('icon-close');
+      let isMenuOpen = false;
+
+      mobileMenuBtn.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('hidden');
+          iconMenu.classList.add('hidden');
+          iconClose.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          iconMenu.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        }
+      });
+
+      // Close mobile menu on link click
+      document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+          isMenuOpen = false;
+          mobileMenu.classList.add('hidden');
+          iconMenu.classList.remove('hidden');
+          iconClose.classList.add('hidden');
+        });
+      });
+
+
+      // 3. Render Menu & Filter Logic
+      const menuGrid = document.getElementById('menu-grid');
+      const categoriesContainer = document.getElementById('menu-categories');
+      let activeCategory = 'all';
+
+      const categories = [
+        { id: 'all', label: 'Todos' },
+        { id: 'burgers', label: 'Hambúrgueres' },
+        { id: 'combos', label: 'Combos' },
+        { id: 'others', label: 'Acompanhamentos & Bebidas' }
+      ];
+
+      // Render Categories
+      categories.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.textContent = cat.label;
+        btn.className = `px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest transition-all ${cat.id === 'all'
+            ? 'bg-appetite-orange text-white shadow-lg shadow-orange-500/30'
+            : 'bg-white text-gray-500 hover:bg-orange-50'
+          }`;
+        btn.onclick = () => filterMenu(cat.id, btn);
+        categoriesContainer.appendChild(btn);
+      });
+
+      function filterMenu(categoryId, clickedBtn) {
+        activeCategory = categoryId;
+
+        // Update buttons
+        Array.from(categoriesContainer.children).forEach(btn => {
+          btn.className = `px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest transition-all ${btn === clickedBtn
+              ? 'bg-appetite-orange text-white shadow-lg shadow-orange-500/30'
+              : 'bg-white text-gray-500 hover:bg-orange-50'
+            }`;
+        });
+
+        renderMenu();
+      }
+
+      function generateWhatsAppLink(item) {
+        const message = encodeURIComponent(`Olá! Gostaria de pedir o ${item.name} (R$ ${item.price.toFixed(2).replace('.', ',')})`);
+        return `${BRASA_INFO.whatsappUrl}?text=${message}`;
+      }
+
+      function renderMenu() {
+        menuGrid.innerHTML = '';
+
+        const filteredItems = MENU_ITEMS.filter(item => {
+          if (activeCategory === 'all') return true;
+          if (activeCategory === 'burgers') return item.category === 'burger';
+          if (activeCategory === 'combos') return item.category === 'combo';
+          if (activeCategory === 'others') return item.category === 'side' || item.category === 'drink';
+          return true;
+        });
+
+        filteredItems.forEach(item => {
+          const card = document.createElement('div');
+          card.className = "bg-white rounded-[2rem] overflow-hidden group shadow-[0_10px_30px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-orange-500/10 transition-all duration-500 flex flex-col h-full";
+          card.innerHTML = `
+                    <div class="relative h-64 overflow-hidden">
+                        <img 
+                            src="${item.image}" 
+                            alt="${item.name}"
+                            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div class="absolute top-4 right-4 bg-appetite-orange text-white font-title px-4 py-2 rounded-xl text-lg shadow-lg">
+                            R$ ${item.price.toFixed(2).replace('.', ',')}
+                        </div>
+                        ${item.category === 'combo' ? `
+                        <div class="absolute top-4 left-4 bg-black text-white font-bold px-3 py-1 rounded-lg text-xs uppercase tracking-widest">
+                            Best Seller
+                        </div>` : ''}
+                    </div>
+                    
+                    <div class="p-8 flex flex-col flex-grow">
+                        <h3 class="font-title text-2xl text-black mb-3 uppercase italic group-hover:text-appetite-orange transition-colors">
+                            ${item.name}
+                        </h3>
+                        <p class="text-gray-500 text-sm leading-relaxed mb-8 flex-grow">
+                            ${item.description}
+                        </p>
+                        
+                        <a 
+                            href="${generateWhatsAppLink(item)}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-full flex items-center justify-center gap-3 bg-black text-white py-4 rounded-2xl font-bold hover:bg-appetite-orange transition-all active:scale-95"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+                            <span>Pedir no WhatsApp</span>
+                        </a>
+                    </div>
+                `;
+          menuGrid.appendChild(card);
+        });
+      }
+
+      // Initial render
+      renderMenu();
+
+
+      // 4. Render Reviews
+      const reviewsGrid = document.getElementById('reviews-grid');
+      TESTIMONIALS.forEach(review => {
+        const card = document.createElement('div');
+        card.className = "bg-white p-10 rounded-[2.5rem] shadow-xl shadow-orange-500/5 relative hover:-translate-y-2 transition-transform duration-500";
+
+        // Generate Stars
+        let starsHtml = '';
+        for (let i = 0; i < review.stars; i++) {
+          starsHtml += `<svg width="18" height="18" fill="#FF5C00" color="#FF5C00" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>`;
+        }
+
+        card.innerHTML = `
+                <div class="absolute top-8 right-8 text-orange-100">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/></svg>
+                </div>
+                
+                <div class="flex gap-1 mb-6">
+                    ${starsHtml}
+                </div>
+                
+                <p class="text-gray-700 italic leading-relaxed mb-8 relative z-10">
+                    "${review.text}"
+                </p>
+                
+                <div class="flex items-center gap-4 border-t border-gray-50 pt-8">
+                    <img 
+                        src="${review.photo}" 
+                        alt="${review.name}"
+                        class="w-14 h-14 rounded-full border-2 border-appetite-orange p-0.5 object-cover"
+                    />
+                    <div>
+                        <h4 class="font-bold text-black">${review.name}</h4>
+                        <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Cliente Verificado</p>
+                    </div>
+                </div>
+            `;
+        reviewsGrid.appendChild(card);
+      });
+
+    });
+  </script>
+</body>
+
+</html>
